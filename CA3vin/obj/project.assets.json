@@ -2062,11 +2062,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3vin\\CA3vin.csproj",
+      "projectUniqueName": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3\\CA3vin\\CA3vin.csproj",
       "projectName": "CA3vin",
-      "projectPath": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3vin\\CA3vin.csproj",
+      "projectPath": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3\\CA3vin\\CA3vin.csproj",
       "packagesPath": "C:\\Users\\karlo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3vin\\obj\\",
+      "outputPath": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3\\CA3vin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\karlo\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CA3vin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+055aea41c8cc5d2ebca26e05ab3091893fa56147")]
 [assembly: System.Reflection.AssemblyProductAttribute("CA3vin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CA3vin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

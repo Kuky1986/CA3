@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v2n8ECVDukNXrvwHU4ugP5CBetqq489io4WoxHVeUtVOucqmtElrBgaFEu5UruS69r+EkJQBg1aZQDsbZ9L4WQ==",
+  "dgSpecHash": "gXUvY7grP1kXOPCA8wg6tO/xxrwTKAfXjx5u9n36vO6JwppeJLzZJ7d4Ptr2yYkwlOkxcmeUmIZf5ARtKok5DA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3vin\\CA3vin.csproj",
+  "projectFilePath": "C:\\Users\\karlo\\source\\repos\\CA3vin\\CA3\\CA3vin\\CA3vin.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\karlo\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.0\\microsoft.aspnetcore.authorization.8.0.0.nupkg.sha512",
     "C:\\Users\\karlo\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.0\\microsoft.aspnetcore.components.8.0.0.nupkg.sha512",
