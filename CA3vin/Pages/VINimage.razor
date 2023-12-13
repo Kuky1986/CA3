@@ -1,0 +1,160 @@
+﻿@page "/VINimage"
+
+<PageTitle>VIN imagege</PageTitle>>
+
+<h3>VINimage</h3>
+
+@inject HttpClient httpClient
+
+@* <input type="file" onchange="@HandleFileChange" /> *@
+
+<InputFile OnChange="@HandleFileChange" />
+
+<div>
+
+	<p>Select a channel to help decode the VIN!</p>
+	<p>If unknown leave on Default North America.</p>
+
+</div>
+
+<div>
+	<select @bind="selectedValue">
+		<option value="d0">North America</option>
+		<option value="d1">Europe</option>
+		<option value="d2">Aisa</option>
+		<option value="d3">Rest</option>
+	</select>
+</div>
+
+<div>
+	<button @onclick="SendPostImageRequest">Check image for VIN</button>
+</div>
+
+
+<div>
+	@if (root != null && root.status == "SUCCESS")
+	{
+		<p><strong>Service:</strong> @root.service</p>
+		<p><strong>Version:</strong> @root.version</p>
+		<p><strong>Date:</strong> @root.date</p>
+		<p><strong>Status:</strong> @root.status</p>
+		<p><strong>VIN Captured:</strong> @root.vin_captured</p>
+
+		<div class="vin-decode">
+			<p><strong>VIN Decode Information:</strong></p>
+			<p><strong>Status:</strong> @root.vindecode.status</p>
+			<p><strong>Make:</strong> @root.vindecode.make</p>
+			<p><strong>Model:</strong> @root.vindecode.model</p>
+			<p><strong>Year:</strong> @root.vindecode.year</p>
+		</div>
+
+		<p><strong>Location:</strong></p>
+		<p>
+			Left: @root.left, Top: @root.top
+			Width: @root.width, Height: @root.height
+		</p>
+	}
+	else if (root != null && root.status != "SUCCESS")
+	{
+		<p><strong>Service:</strong> @root.service</p>
+		<p><strong>Version:</strong> @root.version</p>
+		<p><strong>Date:</strong> @root.date</p>
+		<p><strong>Status:</strong> @root.status</p>
+		<p><strong>VIN Captured:</strong> @root.vin_captured</p>
+	}
+	else
+	{
+		<p>No response yet. Click the button to send a request.</p>
+	}
+</div>
+
+
+<style>
+	/* Add any additional styling here */
+	.vin-decode {
+		margin-left: 20px;
+	}
+</style>
+@code {
+	@using System.Net.Http
+
+	@using System.Text.Json
+
+	@using System.Net.Http.Headers;
+
+	@using Microsoft.AspNetCore.Components.Forms;
+	
+	@using CA3vin.Models;
+
+	private DChannel selectedValue;
+
+	private string responseBody;
+
+	private Models.Root root;
+
+	private string filename;
+
+
+	private async Task SendPostImageRequest()
+	{
+		try
+		{
+			var request = new HttpRequestMessage
+				{
+					Method = HttpMethod.Post,
+					RequestUri = new Uri("https://vin-recognition.p.rapidapi.com/v2"),
+					Headers =
+					{
+						{ "X-RapidAPI-Key", "468f2270e2mshdc872788772a5bep1e99a0jsn5ca02c2b17e4" },
+						{ "X-RapidAPI-Host", "vin-recognition.p.rapidapi.com" },
+					},
+					Content = new MultipartFormDataContent
+				{
+					new StringContent("")
+					{
+						Headers =
+						{
+							
+							ContentType = new MediaTypeHeaderValue("application/octet-stream"),
+							ContentDisposition = new ContentDispositionHeaderValue("form-data")
+							{
+								Name = "inputimage",
+								FileName = filename,
+							},
+						}
+					},
+					new StringContent(selectedValue.ToString())
+					{
+						Headers =
+						{
+							ContentDisposition = new ContentDispositionHeaderValue("form-data")
+							{
+								Name = "dchannel",
+							}
+						}
+					},
+				},
+				};
+
+			using (var response = await httpClient.SendAsync(request))
+			{
+				response.EnsureSuccessStatusCode();
+				responseBody = await response.Content.ReadAsStringAsync();
+				root = JsonSerializer.Deserialize<Models.Root>(responseBody, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+			}
+		}
+		catch (Exception ex)
+		{
+			responseBody = $"Error: {ex.Message}";
+		}
+	}
+
+	private async Task HandleFileChange(InputFileChangeEventArgs e)
+	{
+		var file = e.File;
+		filename = file.Name.ToString();
+		Console.WriteLine(filename);
+	}
+
+}
